@@ -1,14 +1,16 @@
 async function createKomik(database, komikData) {
-    const { title, description, author, imageType, imageName, imageData } = komikData;
+    // Ubah destructuring agar sesuai dengan model (judul, deskripsi, penulis)
+    const { judul, deskripsi, penulis, imageType, imageName, imageData } = komikData;
 
-    if (!title || !description || !author) {
-        throw new Error('Title, description, dan author wajib diisi');
+    // Validasi input menggunakan nama field yang baru
+    if (!judul || !deskripsi || !penulis) {
+        throw new Error('Judul, deskripsi, dan penulis wajib diisi');
     }
 
     const newKomik = await database.Komik.create({
-        title,
-        description,
-        author,
+        judul,      // Sesuai model
+        deskripsi,  // Sesuai model
+        penulis,    // Sesuai model
         imageType: imageType || null,
         imageName: imageName || null,
         imageData: imageData || null,
@@ -45,6 +47,8 @@ async function updateKomik(database, id, komikData) {
         throw new Error(`Komik dengan ID ${id} tidak ditemukan`);
     }
 
+    // Update data akan otomatis mencocokkan field yang ada di komikData
+    // Pastikan di Postman/Frontend kamu mengirim key 'judul', 'penulis', 'deskripsi'
     await komik.update(komikData);
     return komik;
 }

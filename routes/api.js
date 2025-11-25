@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const komikController = require('../controllers/komikController');
+// Gunakan 'K' besar sesuai nama file fisik
+const komikController = require('../controllers/KomikController');
 const upload = multer({ storage: multer.memoryStorage() });
 
 router.post('/komik', upload.single('gambar'), komikController.createKomik);
