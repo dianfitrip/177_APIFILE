@@ -5,8 +5,9 @@ async function connectDatabase(){
         await db.sequelize.authenticate();
         console.log('Database conected successfully');
 
-        await db.sequelize.sync( {alter: true});
-        console.log('Databse synchronized');
+        // GANTI 'force: true' JADI 'alter: true' agar tabel tidak dihapus terus
+        await db.sequelize.sync({ alter: true }); 
+        console.log('Database synchronized');
 
     } catch (err) {
         console.error('Database connection failed:', err.message);
@@ -15,4 +16,3 @@ async function connectDatabase(){
 }
 
 module.exports = connectDatabase;
-
